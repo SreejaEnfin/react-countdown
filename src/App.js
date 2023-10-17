@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import TimerInput from "./components/TimerInput/TimerInput";
+import TimerOuput from "./components/TimerOutput/TimerOuput";
+import React, { useState } from "react";
 
 function App() {
+  const [inputData, setInputData] = useState("");
+  const [orgVal, setOrgVal] = useState("");
+  const [pauseFlag, setPauseFlag] = useState(false);
+  const [resetFlag, setResetFlag] = useState(false);
+
+  const timerInputHandler = (timerData) => {
+    setInputData(timerData);
+    setOrgVal(timerData);
+    // console.log(inputData);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <TimerInput
+        onSaveTimerInput={timerInputHandler}
+        setPauseFlag={setPauseFlag}
+        pauseFlag={pauseFlag}
+        setResetFlag={setResetFlag}
+      />
+      <TimerOuput
+        TimerData={inputData}
+        setInputData={setInputData}
+        pauseFlag={pauseFlag}
+        resetFlag={resetFlag}
+        orgInput={orgVal}
+      />
+    </>
   );
 }
 
